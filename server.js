@@ -1,9 +1,16 @@
 import express from "express";
-import http from "http";
+import dotenv from "dotenv";
 import socket from "socket.io";
+
+dotenv.config();
+const PORT = process.env.PORT || 9000;
+
 const app = express();
-const server = http.createServer(app);
-const io = socket(server);
+const io = socket(
+  app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:9000`);
+  })
+);
 
 // Routes
 import routes from "./routes/routes";
@@ -25,8 +32,4 @@ io.on("connection", (socket) => {
     // Sender to the sender
     socket.emit("new-message", { room, name, message });
   });
-});
-
-server.listen(9000, () => {
-  console.log(`Server is running at http://localhost:9000`);
 });
