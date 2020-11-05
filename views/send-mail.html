@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Send mail</h1>
+    <form method="POST" action="/send-mail" enctype="multipart/form-data">
+        <br/>
+
+        <label>To</label>
+        <br/>
+        <input type="text" name="toEmail" id="toEmail" />
+        <br/>
+        <br/>
+        <label>Or Load Email From File</label>
+        <br/>
+        <input type='file' id="inputfile" />
+        <br/>
+        <br/>
+        <textarea id="output" rows="10" cols="50" name="emailFile"></textarea>
+        <br/>
+        <br/>
+        <label>Subject</label>
+        <br/>
+        <input type="text" name="subject" />
+        <br/>
+        <label>Attach</label>
+        <br/>
+        <input type="file" name="attach" />
+        <br/>
+        <label>Content</label>
+        <br/>
+        <textarea rows="10" cols="50" name="content"></textarea>
+        <br/>
+
+        <button type="submit">Send</button>
+
+    </form>
+    <script type="text/javascript">
+        document.getElementById('inputfile')
+            .addEventListener('change', function () {
+
+                var fr = new FileReader();
+                fr.onload = function () {
+                    document.getElementById('output').value = fr.result;
+                }
+
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+</body>
+
+</html>
