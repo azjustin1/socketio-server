@@ -5,9 +5,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socket(server);
 
-app.get("/", (req, res) => {
-  res.status(200).send("Server is up");
-});
+// Routes
+import routes from "./routes/routes";
+app.use(routes);
 
 io.on("connection", (socket) => {
   console.log(`Connected: ${socket.id}`);
